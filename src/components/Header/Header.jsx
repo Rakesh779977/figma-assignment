@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react';
 import './Header.css';
 
 const NAV_LINKS = [
-  { label: 'About us', href: '#about' },
+  { label: 'Home', href: '#home' },
+  { label: 'Studio', href: '#studio' },
   { label: 'Services', href: '#services' },
-  { label: 'Use Cases', href: '#use-cases' },
-  { label: 'Pricing', href: '#pricing' },
-  { label: 'Blog', href: '#blog' },
+  { label: 'Contact', href: '#contact' },
+  { label: 'FAQs', href: '#faqs' },
 ];
 
 function Header() {
@@ -15,13 +15,12 @@ function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
+      setScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Prevent body scroll when mobile menu is open
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -39,21 +38,8 @@ function Header() {
     <header className={`header${scrolled ? ' header--scrolled' : ''}`}>
       <div className="header__container">
         {/* Logo */}
-        <a href="/" className="header__logo" aria-label="Positivus Home">
-          <svg
-            className="header__logo-icon"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            aria-hidden="true"
-          >
-            <path
-              d="M12 2L13.09 8.26L18 4L14.74 9.91L21 10.91L15.18 13.09L20 18L14.09 15.26L13.09 22L12 15.82L10.91 22L9.91 15.26L4 18L8.82 13.09L3 10.91L9.26 9.91L6 4L10.91 8.26L12 2Z"
-              fill="#B9FF66"
-            />
-          </svg>
-          <span className="header__logo-text">Positivus</span>
+        <a href="#home" className="header__logo" aria-label="Elementum Home">
+          <span className="header__logo-text">elementum</span>
         </a>
 
         {/* Desktop Navigation */}
@@ -69,33 +55,46 @@ function Header() {
           </ul>
         </nav>
 
-        {/* CTA Button */}
-        <a href="#quote" className="header__cta">
-          Request a quote
-        </a>
+        {/* Action Elements: Profile & Hamburger */}
+        <div className="header__actions">
+          <button className="header__action-btn header__profile-btn" aria-label="User Profile">
+            <svg
+              className="header__profile-icon"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+          </button>
 
-        {/* Hamburger Button */}
-        <button
-          className={`header__hamburger${mobileMenuOpen ? ' header__hamburger--active' : ''}`}
-          onClick={() => setMobileMenuOpen((prev) => !prev)}
-          aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
-          aria-expanded={mobileMenuOpen}
-          aria-controls="mobile-menu"
-        >
-          <span className="header__hamburger-line" />
-          <span className="header__hamburger-line" />
-          <span className="header__hamburger-line" />
-        </button>
+          <button
+            className={`header__hamburger${mobileMenuOpen ? ' header__hamburger--active' : ''}`}
+            onClick={() => setMobileMenuOpen((prev) => !prev)}
+            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-menu"
+          >
+            <span className="header__hamburger-line" />
+            <span className="header__hamburger-line" />
+            <span className="header__hamburger-line" />
+          </button>
+        </div>
       </div>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Drawer Menu */}
       <div
         className={`header__overlay${mobileMenuOpen ? ' header__overlay--visible' : ''}`}
         onClick={closeMobileMenu}
         aria-hidden="true"
       />
 
-      {/* Mobile Navigation Drawer */}
       <nav
         id="mobile-menu"
         className={`header__mobile-nav${mobileMenuOpen ? ' header__mobile-nav--open' : ''}`}
@@ -114,9 +113,24 @@ function Header() {
             </li>
           ))}
         </ul>
-        <a href="#quote" className="header__mobile-cta" onClick={closeMobileMenu}>
-          Request a quote
-        </a>
+        <div className="header__mobile-footer">
+          <button className="header__mobile-profile-btn" onClick={closeMobileMenu}>
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+            <span>My Account</span>
+          </button>
+        </div>
       </nav>
     </header>
   );

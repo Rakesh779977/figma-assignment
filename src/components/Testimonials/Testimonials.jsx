@@ -1,174 +1,137 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState } from 'react';
 import './Testimonials.css';
 
-const testimonials = [
+const TESTIMONIALS_DATA = [
   {
     id: 1,
-    quote:
-      'We have been working with Positivus for the past year and have seen a significant increase in website traffic and leads as a result of their efforts. The team is professional, responsive, and truly cares about the success of our business. We highly recommend Positivus to any company looking to grow their online presence.',
-    name: 'John Smith',
-    position: 'Marketing Director at ABC Corp',
+    name: 'Sarah Jenkins',
+    role: 'Product Manager, FinTech Inc.',
+    text: 'Elementum completely reshaped our product strategy. Their collaborative process felt less like an agency and more like a true extension of our team. The final design is stunning and has doubled our conversion rates.',
+    avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=150&h=150',
   },
   {
     id: 2,
-    quote:
-      'Positivus has been instrumental in transforming our digital strategy. Their data-driven approach and creative solutions have helped us reach new audiences and increase conversions by 40%. The team is always available and proactive in suggesting new ideas.',
-    name: 'Jane Doe',
-    position: 'CEO at XYZ Inc',
+    name: 'David Chen',
+    role: 'Co-founder, Bloom Creative',
+    text: "The team's attention to detail, spacing, typography, and interactive aesthetics is top-tier. They challenged our assumptions and brought design insights we would have never reached ourselves.",
+    avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=150&h=150',
   },
   {
     id: 3,
-    quote:
-      'The results we have achieved with Positivus have exceeded our expectations. Their SEO and content marketing strategies have not only improved our search rankings but also established us as thought leaders in our industry.',
-    name: 'Michael Johnson',
-    position: 'VP of Marketing at Tech Solutions',
+    name: 'Elena Rostova',
+    role: 'VP of Marketing, Horizon Corp',
+    text: "Elementum proved that speed and premium quality don't have to be mutually exclusive. Their sprint-based workflow kept us fully aligned, and their creative campaigns have gotten us massive traction.",
+    avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=150&h=150',
   },
   {
     id: 4,
-    quote:
-      'Working with Positivus has been a game-changer for our e-commerce business. Their PPC campaigns and social media management have driven a 60% increase in sales. They truly understand our brand and target audience.',
-    name: 'Emily Davis',
-    position: 'Founder at StyleHub',
-  },
-  {
-    id: 5,
-    quote:
-      'Positivus delivered outstanding results for our startup. Their comprehensive approach to digital marketing helped us build brand awareness from scratch and acquire our first 10,000 customers within six months.',
-    name: 'Robert Wilson',
-    position: 'Co-founder at LaunchPad',
+    name: 'Marcus Aurelius',
+    role: 'Brand Lead, Stoic Group',
+    text: 'It is rare to find an agency that excels at both high-level brand strategy and engineering-ready development. Elementum delivered a seamless system that our engineering team was thrilled to build.',
+    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=150&h=150',
   },
 ];
 
 function Testimonials() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [visibleCount, setVisibleCount] = useState(1);
-
-  const updateVisibleCount = useCallback(() => {
-    if (window.innerWidth >= 1024) {
-      setVisibleCount(3);
-    } else if (window.innerWidth >= 768) {
-      setVisibleCount(2);
-    } else {
-      setVisibleCount(1);
-    }
-  }, []);
-
-  useEffect(() => {
-    updateVisibleCount();
-    window.addEventListener('resize', updateVisibleCount);
-    return () => window.removeEventListener('resize', updateVisibleCount);
-  }, [updateVisibleCount]);
-
-  const maxIndex = Math.max(0, testimonials.length - visibleCount);
-  const totalDots = maxIndex + 1;
-
-  const handlePrev = () => {
-    setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
-  };
+  const [activeIndex, setActiveIndex] = useState(0);
 
   const handleNext = () => {
-    setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+    setActiveIndex((prev) => (prev + 1) % TESTIMONIALS_DATA.length);
   };
 
-  const handleDotClick = (index) => {
-    setCurrentIndex(index);
+  const handlePrev = () => {
+    setActiveIndex((prev) => (prev - 1 + TESTIMONIALS_DATA.length) % TESTIMONIALS_DATA.length);
   };
-
-  // Clamp currentIndex when visibleCount changes
-  useEffect(() => {
-    setCurrentIndex((prev) => Math.min(prev, maxIndex));
-  }, [maxIndex]);
-
-  const translateX = -(currentIndex * (100 / visibleCount));
 
   return (
-    <section className="testimonials" id="testimonials">
-      <div className="testimonials__header">
-        <h2 className="testimonials__title">
-          <span className="testimonials__title-pill">Testimonials</span>
-        </h2>
-        <p className="testimonials__description">
-          Hear from Our Satisfied Clients: Read Our Testimonials to Learn More
-          about Our Digital Marketing Services
-        </p>
-      </div>
-
-      <div className="testimonials__container">
-        <div className="testimonials__carousel">
-          <div
-            className="testimonials__track"
-            style={{
-              transform: `translateX(${translateX}%)`,
-              '--visible-count': visibleCount,
-            }}
-          >
-            {testimonials.map((testimonial) => (
-              <div className="testimonials__slide" key={testimonial.id}>
-                <div className="testimonials__card">
-                  <div className="testimonials__bubble">
-                    <p className="testimonials__quote">
-                      &ldquo;{testimonial.quote}&rdquo;
-                    </p>
-                  </div>
-                  <div className="testimonials__author">
-                    <span className="testimonials__author-name">
-                      {testimonial.name}
-                    </span>
-                    <span className="testimonials__author-position">
-                      {testimonial.position}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+    <section className="testimonials" id="faqs">
+      <div className="testimonials__container container">
+        {/* Section Title */}
+        <div className="testimonials__header">
+          <h2 className="testimonials__title">
+            <span className="highlight-green">What</span> they say <br />
+            <span className="highlight-yellow">About Us</span>
+          </h2>
         </div>
 
-        <div className="testimonials__controls">
-          <button
-            className="testimonials__arrow testimonials__arrow--prev"
-            onClick={handlePrev}
-            aria-label="Previous testimonial"
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path
-                d="M19 12H5M5 12L12 19M5 12L12 5"
-                stroke="#B9FF66"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </button>
+        {/* Content Wrapper */}
+        <div className="testimonials__content-wrapper">
+          {/* Giant decorative quotation mark */}
+          <span className="testimonials__giant-quote">“</span>
 
-          <div className="testimonials__dots">
-            {Array.from({ length: totalDots }).map((_, index) => (
+          {/* Testimonial card */}
+          <div className="testimonials__card">
+            <p className="testimonials__text">
+              {TESTIMONIALS_DATA[activeIndex].text}
+            </p>
+            <div className="testimonials__meta">
+              <h4 className="testimonials__client-name">
+                {TESTIMONIALS_DATA[activeIndex].name}
+              </h4>
+              <span className="testimonials__client-role">
+                {TESTIMONIALS_DATA[activeIndex].role}
+              </span>
+            </div>
+          </div>
+
+          {/* Interactive Avatars Navigation */}
+          <div className="testimonials__avatars-nav">
+            {TESTIMONIALS_DATA.map((t, idx) => (
               <button
-                key={index}
-                className={`testimonials__dot ${
-                  index === currentIndex ? 'testimonials__dot--active' : ''
-                }`}
-                onClick={() => handleDotClick(index)}
-                aria-label={`Go to slide ${index + 1}`}
-              />
+                key={t.id}
+                className={`testimonials__avatar-btn${idx === activeIndex ? ' testimonials__avatar-btn--active' : ''}`}
+                onClick={() => setActiveIndex(idx)}
+                aria-label={`Show testimonial from ${t.name}`}
+              >
+                <img src={t.avatar} alt={t.name} className="testimonials__avatar-img" />
+              </button>
             ))}
           </div>
 
-          <button
-            className="testimonials__arrow testimonials__arrow--next"
-            onClick={handleNext}
-            aria-label="Next testimonial"
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path
-                d="M5 12H19M19 12L12 5M19 12L12 19"
-                stroke="#B9FF66"
-                strokeWidth="2"
+          {/* Navigation Controls */}
+          <div className="testimonials__controls">
+            <button
+              onClick={handlePrev}
+              className="testimonials__control-btn"
+              aria-label="Previous testimonial"
+            >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-              />
-            </svg>
-          </button>
+              >
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+              </svg>
+            </button>
+            <span className="testimonials__index-label">
+              0{activeIndex + 1} / 0{TESTIMONIALS_DATA.length}
+            </span>
+            <button
+              onClick={handleNext}
+              className="testimonials__control-btn"
+              aria-label="Next testimonial"
+            >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
     </section>

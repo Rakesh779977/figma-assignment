@@ -1,13 +1,11 @@
-import Header from './components/Header/Header'
-import Hero from './components/Hero/Hero'
-import Services from './components/Services/Services'
-import CTA from './components/CTA/CTA'
-import WorkingProcess from './components/WorkingProcess/WorkingProcess'
-import Team from './components/Team/Team'
-import Testimonials from './components/Testimonials/Testimonials'
-import ContactForm from './components/ContactForm/ContactForm'
-import Footer from './components/Footer/Footer'
-import './App.css'
+import Header from './components/Header/Header';
+import Hero from './components/Hero/Hero';
+import About from './components/About/About';
+import Services from './components/Services/Services';
+import Testimonials from './components/Testimonials/Testimonials';
+import Newsletter from './components/Newsletter/Newsletter';
+import Footer from './components/Footer/Footer';
+import './App.css';
 
 function App() {
   return (
@@ -15,16 +13,14 @@ function App() {
       <Header />
       <main id="main-content">
         <Hero />
+        <About />
         <Services />
-        <CTA />
-        <WorkingProcess />
-        <Team />
         <Testimonials />
-        <ContactForm />
+        <Newsletter />
       </main>
       <Footer />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

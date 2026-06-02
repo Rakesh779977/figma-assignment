@@ -1,109 +1,75 @@
-import SectionTitle from '../SectionTitle/SectionTitle';
 import './Services.css';
 
-const services = [
+const SERVICES_DATA = [
   {
-    id: 1,
-    title: 'SEO',
-    variant: 'light',
+    id: '01',
+    name: 'Brand & Design',
+    description: 'Defining unique brand positions, voice guidelines, and high-impact visual design systems that build trust and captivate audiences.',
+    link: '#brand-design',
   },
   {
-    id: 2,
-    title: 'Pay-per-click Advertising',
-    variant: 'lime',
+    id: '02',
+    name: 'Product Development',
+    description: 'Crafting bespoke web applications, interactive portals, and modern mobile solutions using optimized frontend architecture.',
+    link: '#product-dev',
   },
   {
-    id: 3,
-    title: 'Social Media Marketing',
-    variant: 'dark',
-  },
-  {
-    id: 4,
-    title: 'Email Marketing',
-    variant: 'light',
-  },
-  {
-    id: 5,
-    title: 'Content Creation',
-    variant: 'lime',
-  },
-  {
-    id: 6,
-    title: 'Analytics and Tracking',
-    variant: 'dark',
+    id: '03',
+    name: 'Growth & Content',
+    description: 'Running target-driven SEO campaigns, creative marketing contents, and data-backed performance strategies to scale conversions.',
+    link: '#growth-content',
   },
 ];
 
-function ServiceCard({ title, variant }) {
-  const arrowColor = variant === 'dark' ? '#B9FF66' : '#191A23';
-  const badgeBg = variant === 'dark' ? '#FFFFFF' : variant === 'lime' ? '#191A23' : '#B9FF66';
-  const badgeColor = variant === 'dark' ? '#191A23' : variant === 'lime' ? '#FFFFFF' : '#191A23';
-
-  return (
-    <div className={`services-card services-card--${variant}`}>
-      <div className="services-card__body">
-        <div className="services-card__info">
-          <h3 className="services-card__title">
-            <span
-              className="services-card__badge"
-              style={{ backgroundColor: badgeBg, color: badgeColor }}
-            >
-              {title}
-            </span>
-          </h3>
-          <a
-            href="#"
-            className={`services-card__link services-card__link--${variant}`}
-          >
-            <span
-              className="services-card__arrow-icon"
-              style={{ backgroundColor: arrowColor }}
-            >
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 20 20"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M4 16L16 4M16 4H6M16 4V14"
-                  stroke={variant === 'dark' ? '#191A23' : '#B9FF66'}
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </span>
-            <span className="services-card__link-text">Learn more</span>
-          </a>
-        </div>
-        <div className="services-card__visual">
-          <div className="services-card__decoration">
-            <div className="services-card__deco-circle"></div>
-            <div className="services-card__deco-line"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function Services() {
   return (
-    <section className="services">
-      <div className="services__container">
-        <SectionTitle
-          title="Services"
-          description="At our digital marketing agency, we offer a range of services to help businesses grow and succeed online. These services include:"
-        />
-        <div className="services__grid">
-          {services.map((service) => (
-            <ServiceCard
-              key={service.id}
-              title={service.title}
-              variant={service.variant}
-            />
+    <section className="services" id="services">
+      <div className="services__container container">
+        {/* Section Header */}
+        <div className="services__header">
+          <h2 className="services__title">
+            What we <span className="highlight-green">can</span> <br />
+            <span className="highlight-yellow">offer you!</span>
+          </h2>
+        </div>
+
+        {/* Services Rows */}
+        <div className="services__list">
+          {SERVICES_DATA.map((service) => (
+            <div key={service.id} className="services__row-item">
+              <a href={service.link} className="services__row-link">
+                {/* Left Description Column */}
+                <div className="services__col services__col--desc">
+                  <span className="services__number">{service.id}</span>
+                  <p className="services__description">{service.description}</p>
+                </div>
+
+                {/* Center Name Column */}
+                <div className="services__col services__col--name">
+                  <h3 className="services__name">{service.name}</h3>
+                </div>
+
+                {/* Right Arrow Column */}
+                <div className="services__col services__col--action">
+                  <div className="services__arrow-btn">
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="services__arrow-icon"
+                    >
+                      <line x1="7" y1="17" x2="17" y2="7"></line>
+                      <polyline points="7 7 17 7 17 17"></polyline>
+                    </svg>
+                  </div>
+                </div>
+              </a>
+            </div>
           ))}
         </div>
       </div>
