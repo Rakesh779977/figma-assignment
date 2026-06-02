@@ -1,0 +1,338 @@
+/* =============================================
+   Hero Section
+   ============================================= */
+
+.hero-section {
+  background: #ffffff;
+  overflow: hidden;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+/* Main Container - Two column layout */
+.hero__container {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 60px 40px 40px;
+}
+
+/* =============================================
+   Left Content
+   ============================================= */
+
+.hero__content {
+  flex: 1;
+  max-width: 560px;
+}
+
+.hero__heading {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 52px;
+  font-weight: 600;
+  line-height: 1.15;
+  color: #191a23;
+  margin: 0 0 28px;
+  letter-spacing: -1.5px;
+}
+
+.hero__highlight {
+  background-color: #b9ff66;
+  padding: 0 8px;
+  border-radius: 6px;
+  display: inline;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.hero__description {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.65;
+  color: #191a23;
+  opacity: 0.75;
+  margin: 0 0 36px;
+  max-width: 480px;
+}
+
+.hero__cta {
+  display: inline-block;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #191a23;
+  padding: 16px 32px;
+  border-radius: 14px;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.hero__cta:hover {
+  background-color: #2d2e3a;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(25, 26, 35, 0.25);
+}
+
+.hero__cta:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(25, 26, 35, 0.15);
+}
+
+/* =============================================
+   Right Illustration
+   ============================================= */
+
+.hero__illustration {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 380px;
+}
+
+.hero__art {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+}
+
+.hero__art-svg {
+  width: 100%;
+  height: auto;
+  animation: hero-float 6s ease-in-out infinite;
+}
+
+@keyframes hero-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+/* Floating decorative dots */
+.hero__art-float {
+  position: absolute;
+  border-radius: 50%;
+  animation: hero-pulse 4s ease-in-out infinite;
+}
+
+.hero__art-float--1 {
+  width: 14px;
+  height: 14px;
+  background: #b9ff66;
+  top: 10%;
+  right: 5%;
+  animation-delay: 0s;
+}
+
+.hero__art-float--2 {
+  width: 10px;
+  height: 10px;
+  background: #191a23;
+  bottom: 20%;
+  left: 2%;
+  animation-delay: 1.3s;
+}
+
+.hero__art-float--3 {
+  width: 8px;
+  height: 8px;
+  background: #b9ff66;
+  top: 55%;
+  right: -2%;
+  animation-delay: 2.6s;
+}
+
+@keyframes hero-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 1;
+  }
+}
+
+/* =============================================
+   Company Logos Strip
+   ============================================= */
+
+.hero__logos {
+  border-top: 1px solid #e8e8e8;
+  border-bottom: 1px solid #e8e8e8;
+  background: #f9f9f9;
+  padding: 24px 0;
+  overflow: hidden;
+  position: relative;
+  /* Fade edges */
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+}
+
+.hero__logos-track {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  animation: logos-scroll 20s linear infinite;
+  width: max-content;
+}
+
+@keyframes logos-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.hero__logos-track:hover {
+  animation-play-state: paused;
+}
+
+.hero__logo-item {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+}
+
+.hero__logo-text {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #191a23;
+  opacity: 0.2;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: opacity 0.3s ease;
+  user-select: none;
+}
+
+.hero__logo-item:hover .hero__logo-text {
+  opacity: 0.45;
+}
+
+/* =============================================
+   Responsive — Tablet (1024px)
+   ============================================= */
+
+@media (max-width: 1024px) {
+  .hero__container {
+    gap: 40px;
+    padding: 40px 32px 32px;
+  }
+
+  .hero__heading {
+    font-size: 40px;
+    margin-bottom: 20px;
+  }
+
+  .hero__description {
+    font-size: 16px;
+    margin-bottom: 28px;
+  }
+
+  .hero__cta {
+    font-size: 16px;
+    padding: 14px 28px;
+  }
+
+  .hero__illustration {
+    min-height: 300px;
+  }
+
+  .hero__art {
+    max-width: 340px;
+  }
+
+  .hero__logos-track {
+    gap: 48px;
+  }
+
+  .hero__logo-text {
+    font-size: 18px;
+  }
+}
+
+/* =============================================
+   Responsive — Mobile (768px)
+   ============================================= */
+
+@media (max-width: 768px) {
+  .hero__container {
+    flex-direction: column;
+    gap: 32px;
+    padding: 32px 20px 24px;
+    text-align: center;
+  }
+
+  .hero__content {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero__heading {
+    font-size: 32px;
+    letter-spacing: -1px;
+    margin-bottom: 16px;
+  }
+
+  .hero__description {
+    font-size: 15px;
+    margin-bottom: 24px;
+    max-width: 100%;
+  }
+
+  .hero__cta {
+    font-size: 16px;
+    padding: 14px 28px;
+    width: 100%;
+    max-width: 320px;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  .hero__illustration {
+    min-height: 260px;
+    width: 100%;
+  }
+
+  .hero__art {
+    max-width: 280px;
+  }
+
+  .hero__logos {
+    padding: 18px 0;
+  }
+
+  .hero__logos-track {
+    gap: 36px;
+    animation-duration: 14s;
+  }
+
+  .hero__logo-text {
+    font-size: 16px;
+  }
+}
